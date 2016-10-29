@@ -1,0 +1,60 @@
+body {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+thead, tfoot {
+	font-weight: 600;
+}
+
+.btn-as-link {
+	cursor: pointer;
+	border: 0px;
+	background: transparent;
+	outline: none;
+}
+
+.btn-as-link:hover {
+	color: #2A6496;
+	text-decoration: underline;
+	font-weight:600;
+}
+
+.fa-trash-o:hover {
+	cursor: pointer;
+	color: #2A6496;
+	text-decoration: underline;
+}
+
+.box {
+	border: 1px solid #999;
+    border-color: black;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+}
+
+.navbar {
+	margin-bottom: 20px;
+}
+
+.padding-bottom-20 {
+	padding-bottom:20px;
+}
+
+.padding-top-20 {
+	padding-top:20px;
+}
+
+.supplier-option {
+	font-size: 18px;
+}
+
+/*autocomplete style */
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
