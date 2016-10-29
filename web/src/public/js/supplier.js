@@ -25,15 +25,24 @@ $(document).ready(function() {
 		grid.id = 'component-table-grid-supplier';
 		$('#supplier-content').append(grid);
 		$('#' + grid.id).DataTable({
-			aoColumns: [
-				null,
-				null,
-				null, {
-					bSortable: false
-				}, {
-					bSortable: false
-				}
-			]
+			aoColumns: [{
+				sWidth: "5%",
+				bSearchable: false
+			}, {
+				sWidth: "20%",
+				bSearchable: true
+			}, {
+				sWidth: "20%",
+				bSearchable: true
+			}, {
+				sWidth: "15%",
+				bSearchable: false,
+				bSortable: false
+			}, {
+				sWidth: "40%",
+				bSearchable: false,
+				bSortable: false
+			}]
 		});
 	};
 

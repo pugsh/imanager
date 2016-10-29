@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// 'use strict';
-	
+
 	var refreshGrid = function() {
 		var cofig = {
 			url: "/imanager/api/product",
@@ -21,7 +21,19 @@ $(document).ready(function() {
 		var grid = component.createGrid(products, header);
 		grid.id = 'component-table-grid-product';
 		$('#product-content').append(grid);
-		$('#' + grid.id).DataTable();
+		$('#' + grid.id).DataTable({
+			bAutoWidth: false,
+			aoColumns: [{
+				sWidth: "10%",
+				bSearchable: false
+			}, {
+				sWidth: "70%",
+				bSearchable: true
+			}, {
+				sWidth: "20%",
+				bSearchable: true
+			}]
+		});
 	};
 
 	refreshGrid();

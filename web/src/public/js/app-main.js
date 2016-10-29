@@ -312,12 +312,18 @@ $(document).ready(function() {
 		$('#component-modal-body').append(container);
 		$('#component-modal-body').append(gridWapper);
 		$('#' + grid.id).DataTable({
-			aoColumns: [
-				null,
-				null, {
-					bSortable: false
-				}
-			]
+			bAutoWidth: false,
+			aoColumns: [{
+				sWidth: "60%",
+				bSearchable: true
+			}, {
+				sWidth: "20%",
+				bSearchable: false
+			}, {
+				sWidth: "20%",
+				bSearchable: false,
+				bSortable: false
+			}]
 		});
 	};
 

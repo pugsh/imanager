@@ -26,14 +26,21 @@ $(document).ready(function() {
 		grid.id = 'component-table-grid-customer';
 		$('#customer-content').append(grid);
 		$('#' + grid.id).DataTable({
-			aoColumns: [
-				null,
-				null, {
-					bSortable: false
-				}, {
-					bSortable: false
-				}
-			]
+			aoColumns: [{
+				sWidth: "10%",
+				bSearchable: false
+			}, {
+				sWidth: "30%",
+				bSearchable: true
+			}, {
+				sWidth: "20%",
+				bSearchable: true,
+				bSortable: false
+			}, {
+				sWidth: "40%",
+				bSearchable: true,
+				bSortable: false
+			}]
 		});
 	};
 

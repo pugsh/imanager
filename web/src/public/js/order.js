@@ -53,7 +53,22 @@ $(document).ready(function() {
 
 		$('#order-grid').empty();
 		$('#order-grid').append(grid);
-		$('#' + grid.id).DataTable();
+		$('#' + grid.id).DataTable({
+			bAutoWidth: false,
+			aoColumns: [{
+				sWidth: "10%",
+				bSearchable: false
+			}, {
+				sWidth: "60%",
+				bSearchable: true
+			}, {
+				sWidth: "20%",
+				bSearchable: false
+			}, {
+				sWidth: "10%",
+				bSearchable: false
+			}]
+		});
 	};
 
 	var refreshItemGrid = function() {
@@ -79,7 +94,25 @@ $(document).ready(function() {
 
 		$('#item-grid').empty();
 		$('#item-grid').append(grid);
-		$('#' + grid.id).DataTable();
+		$('#' + grid.id).DataTable({
+			bAutoWidth: false,
+			aoColumns: [{
+				sWidth: "10%",
+				bSearchable: false
+			}, {
+				sWidth: "50%",
+				bSearchable: true
+			}, {
+				sWidth: "10%",
+				bSearchable: false
+			}, {
+				sWidth: "20%",
+				bSearchable: false
+			}, {
+				sWidth: "10%",
+				bSearchable: false
+			}]
+		});
 	};
 
 	var validate = function() {
