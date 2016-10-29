@@ -140,23 +140,26 @@ $(document).ready(function() {
 
 	imanager.onDelete = function(evt) {
 		debugger;
-		var confirm = component.showWarning();
-		if (confirm === true) {
-			var form = $('#dialog-form')[0];
-			var data = form.getGroupData(),
-				model = form.model,
-				key = form.key;
-			var response = imanager.callService({
-				url: '/imanager/api/' + model + '/remove',
-				type: 'POST',
-				data: {
-					id: data[key]
-				}
-			});
+		var config = {
+			warningMessage: 'Click on Continue to delete.',
+			callBack: function(modal) {
+				var form = $('#dialog-form')[0];
+				var data = form.getGroupData(),
+					model = form.model,
+					key = form.key;
+				var response = imanager.callService({
+					url: '/imanager/api/' + model + '/remove',
+					type: 'POST',
+					data: {
+						id: data[key]
+					}
+				});
+				$('#' + modal).modal('hide');
+				component.showMessage(response);
+			}
+		};
 
-			$('#dialog-cancel').click();
-			component.showMessage(response);
-		}
+		component.showWarning(config);
 	};
 
 	imanager.fillCustomerDialog = function(config) {

@@ -249,7 +249,25 @@
 	};
 
 	component.showWarning = function(config) {
-		return confirm('Press OK to continue delete.');
+		debugger;
+		if (config === undefined) {
+			throw 'config if not defined';
+		}
+		// hide first modal to show warning
+		$('#component-common-modal').modal('hide');
+		var page = '/imanager/view/common_warning.html',
+			container = 'common-dialog-warning';
+
+		$('#' + container).load(page, function(res) {
+			$('#dialog-warning-body').html(config.warningMessage);
+			$('#dialog-warning').modal({
+					backdrop: 'static',
+					keyboard: false
+				})
+				.one('click', '#warning-continue', function(evt) {
+					config.callBack('dialog-warning');
+				});
+		});
 	};
 
 })();

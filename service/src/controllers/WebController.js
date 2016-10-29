@@ -13,7 +13,8 @@ const PageType = {
 	ORDER: 'order.html',
 	INVOICE: 'invoice.html',
 	PAGE_NOT_FOUND: '404.html',
-	COMMON_DIALOG: 'common_dialog.html'
+	COMMON_DIALOG: 'common_dialog.html',
+	COMMON_WARNING: 'common_warning.html'
 };
 
 var getPage = function(req, res, next) {
