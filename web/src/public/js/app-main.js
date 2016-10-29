@@ -298,26 +298,33 @@ $(document).ready(function() {
 			labels: ['Item Name', 'Quantity', 'Delete'],
 			keys: ['product.productName', 'quantity', function(product) {
 				var div = document.createElement('div');
-				var del = component.createBtn('fa fa-trash-o fa-lg', 'Delete', deleteHandler);
+				var del = component.createBtn('fa fa-trash-o fa-lg', 'Delete Item', deleteHandler);
 				div.appendChild(del);
 				return div;
 			}]
 		};
 
 		grid = component.createGrid(order.items, header);
-		grid.id = 'component-table-grid-item';
+		grid.id = 'dialog-order-grid-item';
+		grid.setAttribute('class', 'table table-hover');
 		var gridWapper = document.createElement('div');
 		gridWapper.appendChild(grid);
-		// grid.setAttribute('class', 'table-hover table-bordered');
+		gridWapper.setAttribute('class', 'box');
 
 		container.data = order;
 		container.model = config.model;
 		container.key = config.key;
 		container.viewMode = config.viewMode;
-		// $(container).append(grid);
 		$('#component-modal-body').append(container);
 		$('#component-modal-body').append(gridWapper);
-		$('#' + grid.id).DataTable();
+		$('#' + grid.id).DataTable({
+			aoColumns: [
+				null,
+				null, {
+					bSortable: false
+				}
+			]
+		});
 	};
 
 	imanager.saveOrderChange = function(evt) {

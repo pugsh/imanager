@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// 'use strict';
-	
+
 	var refreshGrid = function() {
 		var config = {
 			url: "/imanager/api/supplier",
@@ -24,7 +24,17 @@ $(document).ready(function() {
 		var grid = component.createGrid(suppliers, header);
 		grid.id = 'component-table-grid-supplier';
 		$('#supplier-content').append(grid);
-		$('#' + grid.id).DataTable();
+		$('#' + grid.id).DataTable({
+			aoColumns: [
+				null,
+				null,
+				null, {
+					bSortable: false
+				}, {
+					bSortable: false
+				}
+			]
+		});
 	};
 
 	$('#add-supplier').click(imanager.showDialog);

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 	// 'use strict';
-	
+
 	var refreshGrid = function() {
 		var config = {
 			url: "/imanager/api/customer",
@@ -25,7 +25,16 @@ $(document).ready(function() {
 		var grid = component.createGrid(customers, header);
 		grid.id = 'component-table-grid-customer';
 		$('#customer-content').append(grid);
-		$('#' + grid.id).DataTable();
+		$('#' + grid.id).DataTable({
+			aoColumns: [
+				null,
+				null, {
+					bSortable: false
+				}, {
+					bSortable: false
+				}
+			]
+		});
 	};
 
 	refreshGrid();
