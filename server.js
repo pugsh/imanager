@@ -23,12 +23,12 @@ app.use(bodyParser.json());
 app.use('/', securityFilter);
 
 //define static resource path
-app.use('/static', express.static(path.join(__dirname + '/web/src/public/js')));
-app.use('/static', express.static(path.join(__dirname + '/web/src/public/css')));
-app.use('/static', express.static(path.join(__dirname + '/web/src/public/lib')));
-app.use('/static', express.static(path.join(__dirname + '/web/src/public/icon')));
-app.use('/images', express.static(path.join(__dirname + '/web/src/public/images')));
-app.use('/fonts', express.static(path.join(__dirname + '/web/src/public/fonts')));
+app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/js')));
+app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/css')));
+app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/lib')));
+app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/icon')));
+app.use('/imanager/images', express.static(path.join(__dirname + '/web/src/public/images')));
+app.use('/imanager/fonts', express.static(path.join(__dirname + '/web/src/public/fonts')));
 
 //serve html file
 app.use('/imanager/view', require('./service/src/controllers/WebController'));
