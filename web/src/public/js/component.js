@@ -119,7 +119,8 @@
 			if (config.viewMode === 'add') {
 				$('#dialog-delete').hide();
 			} else {
-				$('#dialog-delete').click(config.onDelete);
+				// attach on click listener to warning continue button
+				$('#warning-continue').click(config.onDelete);
 			}
 
 			$('#component-common-modal').modal('show');
@@ -246,28 +247,6 @@
 
 	component.clearMessage = function() {
 		$('#message').find(':first-child').remove();
-	};
-
-	component.showWarning = function(config) {
-		debugger;
-		if (config === undefined) {
-			throw 'config if not defined';
-		}
-		// hide first modal to show warning
-		$('#component-common-modal').modal('hide');
-		var page = '/imanager/view/common_warning.html',
-			container = 'common-dialog-warning';
-
-		$('#' + container).load(page, function(res) {
-			$('#dialog-warning-body').html(config.warningMessage);
-			$('#dialog-warning').modal({
-					backdrop: 'static',
-					keyboard: false
-				})
-				.one('click', '#warning-continue', function(evt) {
-					config.callBack('dialog-warning');
-				});
-		});
 	};
 
 })();
