@@ -34,6 +34,8 @@ app.use('/imanager/fonts', express.static(path.join(__dirname + '/web/src/public
 app.use('/imanager/view', require('./service/src/controllers/WebController'));
 //define routes
 app.use('/imanager/api', require('./service/src/controllers/ApiController'));
+// define route for utility service
+app.use('/imanager/report', require('./service/src/controllers/ReportServiceController'));
 
 mongoose.connect(applicationProps.devDBURL)
 	.then(() => {

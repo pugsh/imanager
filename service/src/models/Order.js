@@ -41,7 +41,6 @@ orderDAO.add = function(modelRequest, cb) {
 	var reqItems = newOrder.items || [];
 	var _this = this;
 	newOrder.lastUpdateDate = moment().format('DD-MM-YYYY H:mm:ss');
-	// var today = new 
 	var searchFilter = {
 		supplier: newOrder.supplier,
 		orderDate: new RegExp('^' + moment().format('DD-MM-YYYY'), 'i')

@@ -1,6 +1,5 @@
 //Dependencies
-var express = require('express'),
-	router = express.Router(),
+var	router = require('express').Router(),
 	logger = require('../common/ApiLogger'),
 	ModelType = require('../models/ModelType'),
 	ResponseBuilder = require('./Response');

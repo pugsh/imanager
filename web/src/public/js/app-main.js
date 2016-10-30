@@ -26,25 +26,13 @@ $(document).ready(function() {
 			id: "navbar-order",
 			page: "order.html"
 		},
-		OrderNew: {
-			id: "navbar-order-new",
-			page: "order.html"
-		},
-		OrderSearch: {
-			id: "navbar-order-search",
-			page: "order.html"
-		},
 		Invoice: {
 			id: "navbar-invoice",
 			page: "invoice.html"
 		},
-		InvoiceNew: {
-			id: "navbar-invoice-new",
-			page: "invoice.html"
-		},
-		InvoiceSearch: {
-			id: "navbar-invoice-search",
-			page: "invoice.html"
+		Report: {
+			id: "navbar-report",
+			page: "report.html"
 		}
 	};
 

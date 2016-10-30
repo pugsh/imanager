@@ -1,6 +1,5 @@
 //Dependencies
-var express = require('express'),
-	router = express.Router(),
+var router = require('express').Router(),
 	path = require('path');
 
 var VIEW_DIR = '/../../../web/src/views/';
@@ -13,7 +12,8 @@ const PageType = {
 	ORDER: 'order.html',
 	INVOICE: 'invoice.html',
 	PAGE_NOT_FOUND: '404.html',
-	COMMON_DIALOG: 'common_dialog.html'
+	COMMON_DIALOG: 'common_dialog.html',
+	REPORT: 'report.html'
 };
 
 var getPage = function(req, res, next) {

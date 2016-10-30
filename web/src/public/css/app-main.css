@@ -7,15 +7,6 @@ thead, tfoot {
 	font-weight: 600;
 }
 
-/*table{
-	margin: 0 auto;
-	width: 100%;
-	clear: both;
-	border-collapse: collapse;
-	table-layout: fixed;
-	word-wrap:break-word;
-}*/
-
 .btn-as-link {
 	cursor: pointer;
 	border: 0px;
