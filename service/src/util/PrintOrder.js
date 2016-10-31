@@ -9,7 +9,7 @@ var printer = {};
 printer.createReport = function(date, cb) {
 	var orderDate = date || moment().format('DD-MM-YYYY');
 	var searchFilter = {
-		orderDate: new RegExp('^' + orderDate, 'i')
+		orderDate: new RegExp(orderDate, 'i')
 	};
 	var query = order.model.find(searchFilter);
 	query.populate('supplier');
@@ -24,18 +24,18 @@ printer.createReport = function(date, cb) {
 				body,
 				printContent = {};
 
-			printContent.title = 'Order details. Date: ' + orderDate;
+			printContent.title = 'Order details. Order Date: ' + orderDate;
 			printContent.body = [];
 
 			for (var i = 0; i < orders.length; i++) {
 				body = {};
-				text = '';
+				products = [];
 				body.header = orders[i].supplier.supplierName;
 				items = orders[i].items;
 				for (var j = 0; j < items.length; j++) {
-					text = text + items[j].product.productName + '\n';
+					products.push(items[j].product.productName);
 				}
-				body.paragraph = text;
+				body.paragraph = products;
 				printContent.body.push(body);
 			}
 			pdfPrinter.print(printContent, fileName, cb);

@@ -6,41 +6,58 @@ var PDFDocument = require('pdfkit'),
 var printer = {};
 printer.print = function(content, fileName, onFinish) {
 	try {
-		// Create a document
-		var doc = new PDFDocument();
+
+		var xpos = 20,
+			ypos = 30,
+			xmax = 550,
+			ymax = 800;
+
 		var title = content.title;
 		var body = content.body;
+		var basicTextStyle = {
+				width: 175,
+				align: 'justify'
+			},
+			docStyle = {
+				size: 'A4',
+				margin: 20
+			};
 		var file = path.join(__dirname, fileName);
 		var writeStream = fs.createWriteStream(file);
 
-		//  Pipe its output somewhere, like to a file or HTTP response
-		// See below for browser usage
+		// create a document
+		var doc = new PDFDocument(docStyle);
 		doc.pipe(writeStream);
 
-		// and some justified text wrapped into columns
-		doc.text(content.title, 10, 10)
+		// add title of the report
+		doc.text(content.title, 20, 10)
 			.font('Times-Roman', 8)
-			.moveDown(0.5)
-			.text('', {
-				height: 100,
-				width: 465,
-				columns: 3,
-				columnGap: 15,
-				align: 'justify',
-				ellipsis: true,
-				continued: 'yes'
-			});
+			.text('', basicTextStyle);
+		//line gap is set to 1 for the entire document
+		doc.lineGap(1);
 
 		for (var i = 0; i < body.length; i++) {
-			doc.fillColor('red')
-				.text(body[i].header, {
-					underline: true
-				})
-				.fillColor('black')
-				.text(body[i].paragraph)
-				.moveDown(0.5);
+			if (ymax - ypos <= doc.heightOfString(body[i].header, basicTextStyle)) {
+				xpos += 185;
+				ypos = 30;
+
+				if (xmax - xpos <= 150) {
+					doc = doc.addPage();
+					xpos = 20;
+				}
+			}
+			doc = doc.fillColor('red')
+				.text(body[i].header, xpos, ypos, basicTextStyle);
+			ypos += doc.heightOfString(body[i].header, basicTextStyle);
+
+			doc = doc.fillColor('black');
+			for (var j = 0; j < body[i].paragraph.length; j++) {
+				doc = doc.text(body[i].paragraph[j], xpos, ypos, basicTextStyle);
+				ypos += doc.heightOfString(body[i].paragraph[j], basicTextStyle);
+			}
+			// adds space after end of each supplier
+			ypos += 5;
 		}
-		// Finalize PDF file
 		doc.end();
 		writeStream.on('finish', function() {
 			onFinish(null, file);

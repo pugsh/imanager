@@ -1,12 +1,55 @@
 $(document).ready(function() {
 	// 'use strict';
-	var generateReport = function() {
+	var getDate = function() {
 		debugger;
-		// var response = imanager.callService({
-		// 	url: '/imanager/report/order',
-		// 	type: 'GET'
-		// });
+		var reportId = $('#report-selector').val();
+		var date, DDMMYYYY = 'DD-MM-YYYY',
+			MMYYYY = 'MM-YYYY',
+			YYYY = 'YYYY';
+		switch (reportId) {
+			case '0':
+				date = moment().format(DDMMYYYY);
+				break;
+			case '-1':
+				date = moment().subtract(1, 'days').format(DDMMYYYY);
+				break;
+			case '-2':
+				date = moment().subtract(2, 'days').format(DDMMYYYY);
+				break;
+			case 'm':
+				date = moment().format(MMYYYY);
+				break;
+			case '-1m':
+				date = moment().subtract(1, 'months').format(MMYYYY);
+			case 'y':
+				date = moment().format(YYYY);
+				break;
+			default:
+				date = moment().format(format);
+		}
+		return date;
 	};
 
-	$('#report-orders').click(generateReport);
+	var showReport = function() {
+		debugger;
+		var service = '/imanager/report/order';
+		var url = service + '?date=' + getDate();
+		$('#report-viewer-obj').attr('data', url);
+	};
+
+	var downloadReport = function() {
+		debugger;
+		var service = '/imanager/report/order/download';
+		var url = service + '?date=' + getDate();
+		var a = document.createElement('a');
+		a.setAttribute('href', url);
+		a.setAttribute('style', 'display:none');
+
+		$('#report-download').empty();
+		$('#report-download').append(a);
+		a.click();
+	};
+
+	$('#report-orders').click(showReport);
+	$('#report-orders-download').click(downloadReport);
 });
