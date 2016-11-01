@@ -1,7 +1,8 @@
 //Dependencies
 var router = require('express').Router(),
 	logger = require('../common/ApiLogger'),
-	printer = require('../util/PrintOrder');
+	printer = require('../util/PrintOrder'),
+	moment = require('moment');
 
 var downloadReport = function(req, res, next) {
 	var date = req.query.date;
@@ -10,7 +11,7 @@ var downloadReport = function(req, res, next) {
 			logger.error('Eror generating report.', err);
 			res.send('Failed generate report. Try again after some time.');
 		} else {
-			res.download(report);
+			res.download(report, moment().format('YYYYMMDDHmmss') + '.pdf');
 		}
 	});
 };

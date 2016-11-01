@@ -21,6 +21,7 @@ $(document).ready(function() {
 				break;
 			case '-1m':
 				date = moment().subtract(1, 'months').format(MMYYYY);
+				break;
 			case 'y':
 				date = moment().format(YYYY);
 				break;
@@ -39,10 +40,12 @@ $(document).ready(function() {
 
 	var downloadReport = function() {
 		debugger;
+		var downloadFileName = 'Orders2-' + moment().format('YYYYMMDDHmmss') + '.pdf';
 		var service = '/imanager/report/order/download';
 		var url = service + '?date=' + getDate();
 		var a = document.createElement('a');
-		a.setAttribute('href', url);
+		a.href = url;
+		a.download = downloadFileName;
 		a.setAttribute('style', 'display:none');
 
 		$('#report-download').empty();

@@ -8,6 +8,7 @@ var fileName = 'Orders.pdf';
 var printer = {};
 printer.createReport = function(date, cb) {
 	var orderDate = date || moment().format('DD-MM-YYYY');
+	var reportedOn = moment().format('DD-MM-YYYY H:mm:ss');
 	var searchFilter = {
 		orderDate: new RegExp(orderDate, 'i')
 	};
@@ -24,7 +25,9 @@ printer.createReport = function(date, cb) {
 				body,
 				printContent = {};
 
-			printContent.title = 'Order details. Order Date: ' + orderDate;
+			printContent.title = 'Order Summary Report';
+			printContent.reportingPeriod = 'Order Date: ' + orderDate;
+			printContent.createdOn = 'Reporting Date: ' + reportedOn;
 			printContent.body = [];
 
 			for (var i = 0; i < orders.length; i++) {

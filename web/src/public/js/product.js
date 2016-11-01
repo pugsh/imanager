@@ -21,7 +21,7 @@ $(document).ready(function() {
 		var grid = component.createGrid(products, header);
 		grid.id = 'component-table-grid-product';
 		$('#product-content').append(grid);
-		$('#' + grid.id).DataTable({
+		var table = $('#' + grid.id).DataTable({
 			bAutoWidth: false,
 			aoColumns: [{
 				sWidth: "10%",
