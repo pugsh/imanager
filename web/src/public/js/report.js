@@ -45,7 +45,6 @@ $(document).ready(function() {
 		var url = service + '?date=' + getDate();
 		var a = document.createElement('a');
 		a.href = url;
-		a.download = downloadFileName;
 		a.setAttribute('style', 'display:none');
 
 		$('#report-download').empty();
