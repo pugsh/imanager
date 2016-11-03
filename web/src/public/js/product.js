@@ -1,7 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
 	// 'use strict';
-
-	var refreshGrid = function() {
+	var refreshGrid = function () {
 		var cofig = {
 			url: "/imanager/api/product",
 			type: "GET"
@@ -11,7 +10,7 @@ $(document).ready(function() {
 
 		var header = {
 			labels: ['Product Id', 'Product Name', 'Price'],
-			keys: [function(product) {
+			keys: [function (product) {
 				return component.createBtnAsLink({
 					label: product.productId,
 					identifier: 'product.productId'

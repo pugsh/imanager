@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 	<div>
 		<div id="message"></div>
@@ -14,8 +15,8 @@
 				<option value="m">Current month's order</option>
 				<option value="-1m">Previous month's order</option>
 				<option value="y">Current year's order</option>
-			</select> 
-			<button id="report-orders" class="btn-as-link" style="font-size: 18px;" >
+			</select>
+			<button id="report-orders-view" class="btn-as-link" style="font-size: 18px;">
 				<span class="fa fa-file-text-o fa-lg" aria-hidden="true"></span>
 				View Report
 			</button>
@@ -24,10 +25,10 @@
 				Download Report
 			</button>
 		</div>
-		<br >
+		<br>
 		<div id="report-content">
 			<div id="report-viewer">
-				<object id="report-viewer-obj" width="100%" height="800"/>
+				<object id="report-viewer-obj" width="100%" height="800" />
 			</div>
 			<div id="report-download"></div>
 		</div>
@@ -37,4 +38,5 @@
 	</div>
 	<script type="text/javascript" src="/imanager/static/report.js"></script>
 </body>
+
 </html>

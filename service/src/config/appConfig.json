@@ -1,51 +1,64 @@
-[{
-	"env": "dev",
-	"description": "This is development environment configuration",
-	"resources": [{
-		"language": "en_US",
-		"file": "../resources/messageResource_en_US.json"
-	}, {
-		"language": "fr_CA",
-		"file": "../resources/messageResource_fr_CA.json"
-	}],
-	"databases": [{
-		"type": "mongodb",
-		"db": "test",
-		"serverip": "localhost",
-		"port": "27017",
-		"url": "mongodb://localhost:27017/test"
-	}],
-	"logging": {
-		"level": "debug",
-		"colorize": true,
-		"timestamp": true,
-		"maxsize": 10000,
-		"json": true,
-		"filename": "./logs/applog.log"
-	}
-}, {
-	"env": "prod",
-	"description": "This is production environment configuration",
-	"resources": [{
-		"language": "en_US",
-		"file": "../resources/messageResource_en_US.json"
-	}, {
-		"language": "fr_CA",
-		"file": "../resources/messageResource_fr_CA.json"
-	}],
-	"databases": [{
-		"type": "mongodb",
-		"db": "prod01",
-		"serverip": "localhost",
-		"port": "27017",
-		"url": "mongodb://localhost:27017/prod01"
-	}],
-	"logging": {
-		"level": "error",
-		"transports": [
-			"Console",
-			"File"
+[
+	{
+		"env": "dev",
+		"description": "This is development environment configuration",
+		"resources": [
+			{
+				"language": "en_US",
+				"file": "../resources/messageResource_en_US.json"
+			},
+			{
+				"language": "fr_CA",
+				"file": "../resources/messageResource_fr_CA.json"
+			}
 		],
-		"logFile": "./logs/applog.log"
+		"databases": [
+			{
+				"type": "mongodb",
+				"db": "test",
+				"serverip": "localhost",
+				"port": "27017",
+				"url": "mongodb://localhost:27017/test"
+			}
+		],
+		"logging": {
+			"level": "debug",
+			"colorize": true,
+			"timestamp": true,
+			"maxsize": 10000,
+			"json": true,
+			"filename": "./logs/applog.log"
+		}
+	},
+	{
+		"env": "prod",
+		"description": "This is production environment configuration",
+		"resources": [
+			{
+				"language": "en_US",
+				"file": "../resources/messageResource_en_US.json"
+			},
+			{
+				"language": "fr_CA",
+				"file": "../resources/messageResource_fr_CA.json"
+			}
+		],
+		"databases": [
+			{
+				"type": "mongodb",
+				"db": "prod01",
+				"serverip": "localhost",
+				"port": "27017",
+				"url": "mongodb://localhost:27017/prod01"
+			}
+		],
+		"logging": {
+			"level": "error",
+			"transports": [
+				"Console",
+				"File"
+			],
+			"logFile": "./logs/applog.log"
+		}
 	}
-}]
+]

@@ -1,7 +1,6 @@
 //Dependencies
 var express = require('express'),
 	bodyParser = require('body-parser'),
-	fs = require('fs'),
 	path = require('path'),
 	applicationProps = require('./service/src/config/Configmanager'),
 	mongoose = require('mongoose'),
@@ -10,6 +9,8 @@ var express = require('express'),
 
 // Use native Node promises
 mongoose.Promise = global.Promise;
+// set root app directory
+global.appRootDir = __dirname;
 
 //Express
 var app = express();
@@ -22,13 +23,15 @@ app.use(bodyParser.json());
 
 app.use('/', securityFilter);
 
+// cache expiration time for static resources
+var oneYear = 31536000 * 1000;
 //define static resource path
-app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/js')));
-app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/css')));
-app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/lib')));
-app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/icon')));
-app.use('/imanager/images', express.static(path.join(__dirname + '/web/src/public/images')));
-app.use('/imanager/fonts', express.static(path.join(__dirname + '/web/src/public/fonts')));
+app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/js'), { maxAge: oneYear }));
+app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/css'), { maxAge: oneYear }));
+app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/lib'), { maxAge: oneYear }));
+app.use('/imanager/static', express.static(path.join(__dirname + '/web/src/public/icon'), { maxAge: oneYear }));
+app.use('/imanager/images', express.static(path.join(__dirname + '/web/src/public/images'), { maxAge: oneYear }));
+app.use('/imanager/fonts', express.static(path.join(__dirname + '/web/src/public/fonts'), { maxAge: oneYear }));
 
 //serve html file
 app.use('/imanager/view', require('./service/src/controllers/WebController'));

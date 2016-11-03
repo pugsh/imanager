@@ -1,6 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
 	// 'use strict';
-	var getDate = function() {
+	var getDate = function () {
 		debugger;
 		var reportId = $('#report-selector').val();
 		var date, DDMMYYYY = 'DD-MM-YYYY',
@@ -31,27 +31,26 @@ $(document).ready(function() {
 		return date;
 	};
 
-	var showReport = function() {
+	var viewReport = function () {
 		debugger;
-		var service = '/imanager/report/order';
+		var service = '/imanager/report/order/view';
 		var url = service + '?date=' + getDate();
-		$('#report-viewer-obj').attr('data', url);
+		// $('#report-viewer-obj').attr('data', url);
+		var objEL = document.getElementById('report-viewer-obj');
+		objEL.setAttribute('data', url);
+		objEL.setAttribute('type', 'application/pdf');
 	};
 
-	var downloadReport = function() {
+	var downloadReport = function () {
 		debugger;
-		var downloadFileName = 'Orders2-' + moment().format('YYYYMMDDHmmss') + '.pdf';
 		var service = '/imanager/report/order/download';
-		var url = service + '?date=' + getDate();
+		var urlSuffix = '?date=' + getDate();
 		var a = document.createElement('a');
-		a.href = url;
+		a.href = service + urlSuffix;
 		a.setAttribute('style', 'display:none');
-
-		$('#report-download').empty();
-		$('#report-download').append(a);
 		a.click();
 	};
 
-	$('#report-orders').click(showReport);
+	$('#report-orders-view').click(viewReport);
 	$('#report-orders-download').click(downloadReport);
 });

@@ -20,8 +20,8 @@ var CustomerSchema = new Schema({
 		default: false
 	}
 }, {
-	versionKey: 'version'
-});
+		versionKey: 'version'
+	});
 
 // customer model
 var customer = mongoose.model('customer', CustomerSchema);

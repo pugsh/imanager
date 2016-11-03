@@ -1,6 +1,5 @@
-$(document).ready(function() {
+$(document).ready(function () {
 	// 'use strict';
-
 	window.imanager = {};
 	// used to cache data
 	imanager.cacheData = {};
@@ -36,7 +35,7 @@ $(document).ready(function() {
 		}
 	};
 
-	imanager.callService = function(config) {
+	imanager.callService = function (config) {
 		var response;
 		if (config === undefined) {
 			throw 'config param missing';
@@ -52,7 +51,7 @@ $(document).ready(function() {
 		}
 
 		if (!config.success) {
-			config.success = function(result, status, xhr) {
+			config.success = function (result, status, xhr) {
 				response = result;
 			};
 		}
@@ -66,7 +65,7 @@ $(document).ready(function() {
 		return response;
 	};
 
-	imanager.clickHandler = function(evt) {
+	imanager.clickHandler = function (evt) {
 		for (var name in imanager.NavBarComponents) {
 			var component = imanager.NavBarComponents[name];
 			if (this.id === component.id) {
@@ -75,14 +74,14 @@ $(document).ready(function() {
 		}
 	};
 
-	imanager.addOnlickListeners = function() {
+	imanager.addOnlickListeners = function () {
 		for (var name in imanager.NavBarComponents) {
 			var component = imanager.NavBarComponents[name];
 			$('#' + component.id).click(imanager.clickHandler);
 		}
 	};
 
-	imanager.cache = function(name, value) {
+	imanager.cache = function (name, value) {
 		if (value === undefined) {
 			return imanager.cacheData[name];
 		} else {
@@ -90,7 +89,7 @@ $(document).ready(function() {
 		}
 	};
 
-	imanager.onSave = function(evt) {
+	imanager.onSave = function (evt) {
 		debugger;
 		var form = $('#dialog-form')[0];
 		var data = form.getGroupData(),
@@ -126,7 +125,7 @@ $(document).ready(function() {
 		component.showMessage(response);
 	};
 
-	imanager.onDelete = function(evt) {
+	imanager.onDelete = function (evt) {
 		debugger;
 		var form = $('#dialog-form')[0];
 		var data = form.getGroupData(),
@@ -144,7 +143,7 @@ $(document).ready(function() {
 		component.showMessage(response);
 	};
 
-	imanager.fillCustomerDialog = function(config) {
+	imanager.fillCustomerDialog = function (config) {
 		debugger;
 		var customer, response;
 		if (config.viewMode !== 'add') {
@@ -205,7 +204,7 @@ $(document).ready(function() {
 		$('#component-modal-body').append(container);
 	};
 
-	imanager.fillOrderDialog = function(config) {
+	imanager.fillOrderDialog = function (config) {
 		debugger;
 		var order, response;
 		if (config.viewMode !== 'add') {
@@ -266,7 +265,7 @@ $(document).ready(function() {
 			}]
 		};
 
-		var deleteHandler = function(evt) {
+		var deleteHandler = function (evt) {
 			var row = $(this).closest('tr')[0];
 			var deletedItems = $('#dialog-form')[0].deletedItems;
 			if (deletedItems === undefined) {
@@ -278,7 +277,7 @@ $(document).ready(function() {
 		};
 		var header = {
 			labels: ['Item Name', 'Quantity', 'Delete'],
-			keys: ['product.productName', 'quantity', function(product) {
+			keys: ['product.productName', 'quantity', function (product) {
 				var div = document.createElement('div');
 				var del = component.createBtn('fa fa-trash-o fa-lg', 'Delete Item', deleteHandler);
 				div.appendChild(del);
@@ -315,7 +314,7 @@ $(document).ready(function() {
 		});
 	};
 
-	imanager.saveOrderChange = function(evt) {
+	imanager.saveOrderChange = function (evt) {
 		debugger;
 		var form = $('#dialog-form')[0];
 		var data = form.data;
@@ -348,7 +347,7 @@ $(document).ready(function() {
 		component.showMessage(response);
 	};
 
-	imanager.fillProductDialog = function(config) {
+	imanager.fillProductDialog = function (config) {
 		debugger;
 		var product, response;
 		if (config.viewMode !== 'add') {
@@ -435,7 +434,7 @@ $(document).ready(function() {
 		});
 	};
 
-	imanager.fillSupplierDialog = function(config) {
+	imanager.fillSupplierDialog = function (config) {
 		debugger;
 		var supplier, response;
 		if (config.viewMode !== 'add') {
@@ -504,7 +503,7 @@ $(document).ready(function() {
 		$('#component-modal-body').append(container);
 	};
 
-	imanager.showDialog = function(evt) {
+	imanager.showDialog = function (evt) {
 		debugger;
 		var identifier = this.getAttribute('identifier');
 		var mode = this.getAttribute('mode');

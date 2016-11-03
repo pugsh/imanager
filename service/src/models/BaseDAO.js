@@ -10,15 +10,15 @@ var SequenceSchema = new mongoose.Schema({
 		default: 0
 	}
 }, {
-	_id: false,
-	versionKey: false
-});
+		_id: false,
+		versionKey: false
+	});
 
 // sequence model
 var Sequence = mongoose.model('sequence', SequenceSchema);
 
 // base dao for common db operations
-var BaseDAO = function(modelObj, keyName) {
+var BaseDAO = function (modelObj, keyName) {
 	if (modelObj === undefined || keyName === undefined) {
 		throw "Model or Key is undifined.";
 	}
@@ -28,7 +28,7 @@ var BaseDAO = function(modelObj, keyName) {
 	this.key = keyName;
 
 	//find document by id
-	this.findById = function(id, expands, cb) {
+	this.findById = function (id, expands, cb) {
 		var query = _this.model.find({})
 			.where(_this.key).equals(id);
 
@@ -38,7 +38,7 @@ var BaseDAO = function(modelObj, keyName) {
 				query.populate(expands[i]);
 			}
 		}
-		query.exec(function(err, docs) {
+		query.exec(function (err, docs) {
 			if (err) {
 				cb(err);
 			} else {
@@ -48,7 +48,7 @@ var BaseDAO = function(modelObj, keyName) {
 	};
 
 	//find all documents
-	this.find = function(filterObj, cb) {
+	this.find = function (filterObj, cb) {
 		var qbuilder = this.parseFilter(filterObj);
 		var query = this.model.find(qbuilder.filter);
 
@@ -58,7 +58,7 @@ var BaseDAO = function(modelObj, keyName) {
 			}
 		}
 
-		query.exec(function(err, docs) {
+		query.exec(function (err, docs) {
 			if (err) {
 				cb(err);
 			} else {
@@ -68,14 +68,14 @@ var BaseDAO = function(modelObj, keyName) {
 	};
 
 	// function to create new model
-	this.add = function(modelRequest, cb) {
-		_this.getNextSequence(function(err, seq) {
+	this.add = function (modelRequest, cb) {
+		_this.getNextSequence(function (err, seq) {
 			if (err) {
 				cb(err);
 			}
 			modelRequest[_this.key] = seq;
 			var addmodel = new _this.model(modelRequest);
-			addmodel.save(function(err) {
+			addmodel.save(function (err) {
 				if (err) {
 					cb(err);
 				} else {
@@ -86,7 +86,7 @@ var BaseDAO = function(modelObj, keyName) {
 	};
 
 	// function to update model
-	this.update = function(modelRequest, cb) {
+	this.update = function (modelRequest, cb) {
 		var conditions = {},
 			update = modelRequest,
 			options = {
@@ -95,7 +95,7 @@ var BaseDAO = function(modelObj, keyName) {
 
 		conditions[_this.key] = modelRequest[_this.key];
 		_this.preUpdate(modelRequest);
-		_this.model.update(conditions, update, options, function(err, numAffected) {
+		_this.model.update(conditions, update, options, function (err, numAffected) {
 			_this.postUpdate();
 			if (err) {
 				cb(err);
@@ -106,11 +106,11 @@ var BaseDAO = function(modelObj, keyName) {
 	};
 
 	// function to delete a model
-	this.remove = function(deleteId, cb) {
+	this.remove = function (deleteId, cb) {
 		var conditions = {};
 		conditions[_this.key] = deleteId;
 
-		_this.model.remove(conditions, function(err) {
+		_this.model.remove(conditions, function (err) {
 			if (err) {
 				cb(err);
 			} else {
@@ -119,28 +119,28 @@ var BaseDAO = function(modelObj, keyName) {
 		});
 	};
 
-	this.getNextSequence = function(cb) {
+	this.getNextSequence = function (cb) {
 		Sequence.findOneAndUpdate({
 			name: _this.key
 		}, {
-			$inc: {
-				seq: 1
-			}
-		}, {
-			new: true,
-			upsert: true
-		}, function(err, doc) {
-			if (err) {
-				cb(err);
-			}
-			cb(null, doc.seq);
-		});
+				$inc: {
+					seq: 1
+				}
+			}, {
+				new: true,
+				upsert: true
+			}, function (err, doc) {
+				if (err) {
+					cb(err);
+				}
+				cb(null, doc.seq);
+			});
 	};
 
-	this.parseFilter = function(filterObj) {
+	this.parseFilter = function (filterObj) {
 		var queryBuilder = {
-				filter: {}
-			},
+			filter: {}
+		},
 			filter = {},
 			selector = {};
 		var parts, op, operator, prop, value;
@@ -191,11 +191,11 @@ var BaseDAO = function(modelObj, keyName) {
 	};
 
 	// handler function before update
-	this.preUpdate = function(modelRequest) {
+	this.preUpdate = function (modelRequest) {
 		// override this function for specific behavior
 	};
 	// handler function after update
-	this.postUpdate = function() {
+	this.postUpdate = function () {
 		// override this function for specific behavior
 	};
 };

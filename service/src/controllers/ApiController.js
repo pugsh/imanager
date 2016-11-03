@@ -1,10 +1,10 @@
 //Dependencies
-var	router = require('express').Router(),
+var router = require('express').Router(),
 	logger = require('../common/ApiLogger'),
 	ModelType = require('../models/ModelType'),
 	ResponseBuilder = require('./Response');
 
-var get = function(req, res, next) {
+var get = function (req, res, next) {
 	var modelName = req.params.modelType,
 		model = ModelType[modelName],
 		OperationResult;
@@ -19,7 +19,7 @@ var get = function(req, res, next) {
 			expands: req.query.$expands
 		};
 
-		model.find(filterObj, function(err, docs) {
+		model.find(filterObj, function (err, docs) {
 			var OperationResult;
 			if (err) {
 				OperationResult = new ResponseBuilder.buildErrorResponse(err.toString());
@@ -33,7 +33,7 @@ var get = function(req, res, next) {
 	}
 };
 
-var getById = function(req, res, next) {
+var getById = function (req, res, next) {
 
 	var modelName = req.params.modelType,
 		model = ModelType[modelName],
@@ -46,7 +46,7 @@ var getById = function(req, res, next) {
 		res.send(OperationResult);
 	} else {
 		var expands = req.query.$expands;
-		model.findById(id, expands, function(err, docs) {
+		model.findById(id, expands, function (err, docs) {
 			if (err) {
 				OperationResult = new ResponseBuilder.buildErrorResponse(err.toString());
 				logger.error('Exception occured while fetching model %s', modelName, err);
@@ -59,7 +59,7 @@ var getById = function(req, res, next) {
 	}
 };
 
-var create = function(req, res, next) {
+var create = function (req, res, next) {
 	var modelRequest = req.body,
 		modelName = req.params.modelType,
 		model = ModelType[modelName],
@@ -70,7 +70,7 @@ var create = function(req, res, next) {
 		OperationResult = new ResponseBuilder.buildErrorResponse('Model type is unknown ' + modelName);
 		res.send(OperationResult);
 	} else {
-		model.add(modelRequest, function(err) {
+		model.add(modelRequest, function (err) {
 			if (err) {
 				OperationResult = new ResponseBuilder.buildErrorResponse(err.toString());
 				logger.error('Error creating model %s', modelName, modelRequest);
@@ -83,7 +83,7 @@ var create = function(req, res, next) {
 	}
 };
 
-var update = function(req, res, next) {
+var update = function (req, res, next) {
 	var modelRequest = req.body,
 		modelName = req.params.modelType,
 		model = ModelType[modelName],
@@ -94,7 +94,7 @@ var update = function(req, res, next) {
 		OperationResult = new ResponseBuilder.buildErrorResponse('Model type is unknown ' + modelName);
 		res.send(OperationResult);
 	} else {
-		model.update(modelRequest, function(err) {
+		model.update(modelRequest, function (err) {
 			if (err) {
 				OperationResult = new ResponseBuilder.buildErrorResponse(err.toString());
 				logger.error('Error updating model %s', modelName, modelRequest);
@@ -107,7 +107,7 @@ var update = function(req, res, next) {
 	}
 };
 
-var remove = function(req, res, next) {
+var remove = function (req, res, next) {
 	var deleteReq = req.body,
 		modelName = req.params.modelType,
 		model = ModelType[modelName],
@@ -118,7 +118,7 @@ var remove = function(req, res, next) {
 		OperationResult = new ResponseBuilder.buildErrorResponse('Model type is unknown ' + modelName);
 		res.send(OperationResult);
 	} else {
-		model.remove(deleteReq.id, function(err) {
+		model.remove(deleteReq.id, function (err) {
 			if (err) {
 				OperationResult = new ResponseBuilder.buildErrorResponse(err.toString());
 				logger.error('Error deleting model %s', modelName, deleteReq);

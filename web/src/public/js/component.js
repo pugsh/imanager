@@ -1,9 +1,8 @@
-(function() {
+(function () {
 	// 'use strict';
-
 	window.component = {};
 	// creates a table grid
-	component.createGrid = function(rows, header, showFooter) {
+	component.createGrid = function (rows, header, showFooter) {
 		var grid = document.createElement('table');
 		grid.setAttribute('class', 'display');
 		grid.setAttribute('style', 'width: 100%;');
@@ -55,7 +54,7 @@
 	};
 
 	// creates a select box
-	component.createSelectBox = function(config) {
+	component.createSelectBox = function (config) {
 		var select = document.createElement('select');
 		select.setAttribute('class', 'form-control');
 		select.setAttribute('multiple', 'multiple');
@@ -75,7 +74,7 @@
 		return select;
 	};
 
-	component.createLink = function(data, callBack) {
+	component.createLink = function (data, callBack) {
 		var link = document.createElement('a');
 		link.innerHTML = data || '';
 		link.href = '#';
@@ -83,7 +82,7 @@
 		return link;
 	};
 
-	component.createBtnAsLink = function(data, callBack) {
+	component.createBtnAsLink = function (data, callBack) {
 		var btn = document.createElement('button');
 		btn.innerHTML = data.label || '';
 		btn.setAttribute('class', 'btn-as-link');
@@ -93,7 +92,7 @@
 		return btn;
 	};
 
-	component.createBtn = function(iconClass, title, callBack) {
+	component.createBtn = function (iconClass, title, callBack) {
 		var span = document.createElement('span');
 		span.setAttribute('class', iconClass);
 		span.setAttribute('aria-hidden', 'true');
@@ -102,7 +101,7 @@
 		return span;
 	};
 
-	component.showDialog = function(config) {
+	component.showDialog = function (config) {
 		var page = '/imanager/view/common_dialog.html',
 			container = 'common-dialog';
 		if (config.page) {
@@ -112,7 +111,7 @@
 			container = config.container;
 		}
 
-		$('#' + container).load(page, function(res) {
+		$('#' + container).load(page, function (res) {
 			config.onLoad(config);
 			$('#component-common-modal-label').html(config.title);
 			$('#dialog-save').click(config.onSave);
@@ -127,7 +126,7 @@
 		});
 	};
 
-	component.createGroup = function(config) {
+	component.createGroup = function (config) {
 		var container = document.createElement('div');
 		for (var i = 0; i < config.attributes.length; i++) {
 			container.setAttribute(config.attributes[i].attr, config.attributes[i].value);
@@ -136,7 +135,7 @@
 		container.id = config.id || 'dialog-form';
 		container.seq = 0;
 		container.elements = [];
-		container.addSection = function(config) {
+		container.addSection = function (config) {
 			var div = document.createElement('div');
 			div.setAttribute('class', 'form-group');
 			div.id = 'dialog-form-el' + (this.seq++);
@@ -166,7 +165,7 @@
 			return div.id;
 		};
 
-		container.addAddressSection = function(address) {
+		container.addAddressSection = function (address) {
 			var label = document.createElement('label');
 			label.setAttribute('class', 'col-md-12');
 			label.innerHTML = address.label || '';
@@ -196,7 +195,7 @@
 			this.addSection(config);
 		};
 
-		container.getGroupData = function() {
+		container.getGroupData = function () {
 			var data = {};
 			var els = this.elements,
 				attr, className, pos = 0,
@@ -226,7 +225,7 @@
 		return container;
 	};
 
-	component.showMessage = function(res) {
+	component.showMessage = function (res) {
 		component.clearMessage();
 		var className, type = res.status,
 			message = res.data;
@@ -245,7 +244,7 @@
 		$(messageEl).fadeOut(10000);
 	};
 
-	component.clearMessage = function() {
+	component.clearMessage = function () {
 		$('#message').find(':first-child').remove();
 	};
 

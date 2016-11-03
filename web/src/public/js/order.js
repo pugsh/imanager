@@ -1,7 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
 	// 'use strict';
-	debugger;
-	var init = function() {
+	var init = function () {
 		products = imanager.callService({
 			url: '/imanager/api/product',
 			type: 'GET'
@@ -33,18 +32,18 @@ $(document).ready(function() {
 		imanager.cache('prodNames', prodNames);
 	};
 
-	var refreshOrderGrid = function() {
+	var refreshOrderGrid = function () {
 		var orders = imanager.cache('orders');
 		// cerate order grid
 		var header = {
 			labels: ['Order Id', 'Supplier Name', 'Order Date', 'Total Item'],
-			keys: [function(order) {
+			keys: [function (order) {
 				return component.createBtnAsLink({
 					label: order.orderId || '',
 					mode: 'edit',
 					identifier: 'order.orderId'
 				}, imanager.showDialog);
-			}, 'supplier.supplierName', 'orderDate', function(order) {
+			}, 'supplier.supplierName', 'orderDate', function (order) {
 				return order.items.length || 0;
 			}]
 		};
@@ -71,17 +70,17 @@ $(document).ready(function() {
 		});
 	};
 
-	var refreshItemGrid = function() {
+	var refreshItemGrid = function () {
 		var items = imanager.cache('items');
 		// create item grid
 		var header = {
 			labels: ['Item Id', 'Item Name', 'Order Id', 'Order Date', 'Quantity'],
-			keys: [function(item) {
+			keys: [function (item) {
 				return component.createBtnAsLink({
 					label: !(item.product) ? '' : item.product.productId,
 					identifier: 'product.productId'
 				}, imanager.showDialog);
-			}, 'product.productName', function(item) {
+			}, 'product.productName', function (item) {
 				return component.createBtnAsLink({
 					label: item.orderId || '',
 					identifier: 'order.orderId'
@@ -115,7 +114,7 @@ $(document).ready(function() {
 		});
 	};
 
-	var validate = function() {
+	var validate = function () {
 		var medicine = $('#medicineName').val() || '';
 		var supplier = getSupplier();
 		var quantity = $('#quantity').val() || '';
@@ -125,7 +124,7 @@ $(document).ready(function() {
 			!isNaN(quantity));
 	};
 
-	var onKeyUpHandler = function(evt) {
+	var onKeyUpHandler = function (evt) {
 		var valid;
 		if (evt.keyCode === 13) {
 			valid = validate();
@@ -140,7 +139,7 @@ $(document).ready(function() {
 		}
 	};
 
-	var getSupplier = function() {
+	var getSupplier = function () {
 		var option = $('#supplier').val().trim() || '';
 		var suppliers = $('#optionSection')[0].suppliers || [];
 		var supplier;
@@ -153,13 +152,13 @@ $(document).ready(function() {
 		return supplier;
 	};
 
-	var clearForm = function() {
+	var clearForm = function () {
 		$('#medicineName').val('');
 		$('#supplier').val('');
 		$('#quantity').val('');
 	};
 
-	var submitOnEnter = function() {
+	var submitOnEnter = function () {
 		debugger;
 		var order = {};
 		var item = {};
@@ -190,7 +189,7 @@ $(document).ready(function() {
 		}
 	};
 
-	var showSupplierOption = function(show, options) {
+	var showSupplierOption = function (show, options) {
 		if (show) {
 			$('#supplierOption').html(options);
 			$('#optionSection').slideDown();
@@ -199,7 +198,7 @@ $(document).ready(function() {
 		}
 	};
 
-	var acOnSelect = function(evt) {
+	var acOnSelect = function (evt) {
 		debugger;
 		var value = evt.value;
 		var product = imanager.callService({
@@ -222,7 +221,7 @@ $(document).ready(function() {
 		$('#supplier')[0].focus();
 	};
 
-	var slidUpDownController = function(evt) {
+	var slidUpDownController = function (evt) {
 		var id = '#' + this.id;
 		var el = '#' + $(id).attr('shutter-for');
 		var show = ($(id).attr('show') === 'true');

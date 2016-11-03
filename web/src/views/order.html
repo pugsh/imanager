@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <body>
 	<div>
 		<div id="message"></div>
@@ -8,32 +9,27 @@
 		<div id="order-content">
 			<div id="order-form" class="form-inline" role="form">
 				<div class="form-group">
-					<input type="text" class="form-control" id="medicineName" name="medicineName" 
-					placeholder="Medicine Name" style="width: 300px;">
-					<input type="text" class="form-control" id="supplier" name="supplier" 
-					placeholder="Supplier" style="width: 300px;">
-					<input type="text" class="form-control" id="quantity" name="quantity" 
-					placeholder="Quantity" style="width: 80px;">
+					<input type="text" class="form-control" id="medicineName" name="medicineName" placeholder="Medicine Name" style="width: 300px;">
+					<input type="text" class="form-control" id="supplier" name="supplier" placeholder="Supplier" style="width: 300px;">
+					<input type="text" class="form-control" id="quantity" name="quantity" placeholder="Quantity" style="width: 80px;">
 				</div>
-			</div>	
+			</div>
 		</div>
-		<br >
+		<br>
 		<div id="optionSection" style="display: none;" class="box">
 			<h4>Available Suppliers for the medicine:</h4>
 			<div id="supplierOption" class="supplier-option"></div>
 		</div>
-		<br >
+		<br>
 		<div class="box">
-			<button id="shutter-items" shutter-for = "item-grid" show = "true" 
-			class="btn-as-link" style="font-size: 18px;">
+			<button id="shutter-items" shutter-for="item-grid" show="true" class="btn-as-link" style="font-size: 18px;">
 			<span class="fa fa-plus-circle fa-lg" aria-hidden="true"></span>
 			Recent Items</button>
 			<div id="item-grid" class="padding-top-20"></div>
 		</div>
-		<br >
+		<br>
 		<div class="box">
-			<button id="shutter-orders" shutter-for = "order-grid" show = "true" 
-			class="btn-as-link" style="font-size: 18px;">
+			<button id="shutter-orders" shutter-for="order-grid" show="true" class="btn-as-link" style="font-size: 18px;">
 			<span class="fa fa-plus-circle fa-lg" aria-hidden="true"></span>
 			Recent Orders</button>
 			<div id="order-grid" class="padding-top-20"></div>
@@ -44,4 +40,5 @@
 	</div>
 	<script type="text/javascript" src="/imanager/static/order.js"></script>
 </body>
+
 </html>

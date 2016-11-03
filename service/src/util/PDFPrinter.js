@@ -3,10 +3,10 @@ var PDFDocument = require('pdfkit'),
 	fs = require('fs'),
 	path = require('path');
 
-const xmax = 550,
-	ymax = 800;
+const xMax = 550,
+	yMax = 800;
 
-var addReportHeader = function(content, doc) {
+var addReportHeader = function (content, doc) {
 	var titleWidth = doc.widthOfString(content.title, {
 		width: 200,
 		align: 'justify'
@@ -17,7 +17,7 @@ var addReportHeader = function(content, doc) {
 	});
 
 	// add title of the report
-	doc.text(content.title, (xmax - titleWidth) / 2, 10, {
+	doc.text(content.title, (xMax - titleWidth) / 2, 10, {
 		align: 'centre',
 		underline: true
 	});
@@ -27,7 +27,7 @@ var addReportHeader = function(content, doc) {
 		align: 'left'
 	});
 
-	doc.text(content.createdOn, (xmax - reportingPeriodWidth - 40), 25, {
+	doc.text(content.createdOn, (xMax - reportingPeriodWidth - 40), 25, {
 		align: 'left'
 	});
 
@@ -38,8 +38,15 @@ var addReportHeader = function(content, doc) {
 	return doc;
 };
 
+var ensureTempDir = function () {
+	var tempDir = path.join(global.appRootDir, 'temp');
+	if (!fs.existsSync(tempDir)) {
+		fs.mkdirSync(tempDir);
+	}
+};
+
 var printer = {};
-printer.print = function(content, fileName, onFinish) {
+printer.print = function (content, fileName, onFinish) {
 	try {
 		var xpos = 20,
 			ypos = 45;
@@ -47,14 +54,16 @@ printer.print = function(content, fileName, onFinish) {
 		var title = content.title;
 		var body = content.body;
 		var basicTextStyle = {
-				width: 175,
-				align: 'justify'
-			},
+			width: 175,
+			align: 'justify'
+		},
 			docStyle = {
 				size: 'A4',
 				margin: 20
 			};
-		var file = path.join(__dirname, fileName);
+			
+		ensureTempDir();
+		var file = path.join(global.appRootDir, 'temp', fileName);
 		var writeStream = fs.createWriteStream(file);
 
 		// create a document
@@ -67,11 +76,11 @@ printer.print = function(content, fileName, onFinish) {
 		doc = addReportHeader(content, doc);
 
 		for (var i = 0; i < body.length; i++) {
-			if (ymax - ypos <= doc.heightOfString(body[i].header, basicTextStyle)) {
+			if (yMax - ypos <= doc.heightOfString(body[i].header, basicTextStyle)) {
 				xpos += 185;
 				ypos = 45;
 
-				if (xmax - xpos <= 150) {
+				if (xMax - xpos <= 150) {
 					doc = doc.addPage();
 					xpos = 20;
 				}
@@ -82,6 +91,15 @@ printer.print = function(content, fileName, onFinish) {
 
 			doc = doc.fillColor('black');
 			for (var j = 0; j < body[i].paragraph.length; j++) {
+				if (yMax - ypos <= doc.heightOfString(body[i].paragraph[j], basicTextStyle)) {
+					xpos += 185;
+					ypos = 45;
+
+					if (xMax - xpos <= 150) {
+						doc = doc.addPage();
+						xpos = 20;
+					}
+				}
 				doc = doc.text(body[i].paragraph[j], xpos, ypos, basicTextStyle);
 				ypos += doc.heightOfString(body[i].paragraph[j], basicTextStyle);
 			}
@@ -89,7 +107,7 @@ printer.print = function(content, fileName, onFinish) {
 			ypos += 5;
 		}
 		doc.end();
-		writeStream.on('finish', function() {
+		writeStream.on('finish', function () {
 			onFinish(null, file);
 		});
 	} catch (err) {

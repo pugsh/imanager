@@ -1,7 +1,6 @@
-$(document).ready(function() {
+$(document).ready(function () {
 	// 'use strict';
-
-	var refreshGrid = function() {
+	var refreshGrid = function () {
 		var config = {
 			url: "/imanager/api/customer",
 			type: "GET"
@@ -11,12 +10,12 @@ $(document).ready(function() {
 
 		var header = {
 			labels: ['Customer Id', 'Customer Name', 'Contact', 'Address'],
-			keys: [function(customer) {
+			keys: [function (customer) {
 				return component.createBtnAsLink({
 					label: customer.customerId,
 					identifier: 'customer.customerId'
 				}, imanager.showDialog);
-			}, 'customerName', 'contact', function(customer) {
+			}, 'customerName', 'contact', function (customer) {
 				var address = customer.address;
 				return address.street + ' ' + address.city + ' ' + address.state + '-' + address.pin;
 			}]

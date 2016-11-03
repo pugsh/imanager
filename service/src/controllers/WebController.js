@@ -16,7 +16,7 @@ const PageType = {
 	REPORT: 'report.html'
 };
 
-var getPage = function(req, res, next) {
+var getPage = function (req, res, next) {
 	var pageName = req.params.page;
 	if (pageName.indexOf('.') !== -1) {
 		pageName = pageName.substr(0, pageName.indexOf('.'));
