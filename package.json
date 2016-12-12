@@ -2,17 +2,16 @@
   "name": "inventorymanager",
   "version": "1.0.0",
   "description": "Inventory Manager for reatil store",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js"
   },
-  "start": "node server.js",
   "keywords": [
     "inventory",
     "manager"
   ],
   "author": "Pulak Ghosh <pulak.ghosh90@gmail.com>",
-  "license": "ISC",
+  "license": "Aapache 2.0",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",

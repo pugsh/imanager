@@ -1,15 +1,16 @@
-var fs = require('fs');
+var fs = require('fs'),
+	path = require('path');
 
-const configFile = './service/src/config/appConfig.json';
+const configFile = path.resolve('./service/src/config/appConfig.json');
 
 try {
 	// load application config properties
 	var appConfig = JSON.parse(fs.readFileSync(configFile, 'utf8'));
 
-	var prodConfig = appConfig.filter(function(config) {
+	var prodConfig = appConfig.filter(function (config) {
 		return config.env === 'prod';
 	});
-	var devConfig = appConfig.filter(function(config) {
+	var devConfig = appConfig.filter(function (config) {
 		return config.env === 'dev';
 	});
 

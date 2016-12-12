@@ -2,9 +2,9 @@
 var express = require('express'),
 	bodyParser = require('body-parser'),
 	path = require('path'),
-	applicationProps = require('./service/src/config/Configmanager'),
 	mongoose = require('mongoose'),
 	logger = require('./service/src/common/ApiLogger'),
+	applicationProps = require('./service/src/config/ConfigManager'),
 	securityFilter = require('./service/src/common/middlewares/SecurityFilter');
 
 // Use native Node promises

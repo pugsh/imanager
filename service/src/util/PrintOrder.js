@@ -1,5 +1,5 @@
 //Dependencies
-var order = require('../models/order'),
+var order = require('../models/Order'),
 	moment = require('moment'),
 	pdfPrinter = require('./PDFPrinter');
 
