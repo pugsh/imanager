@@ -4,7 +4,7 @@
   "description": "Inventory Manager for reatil store",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "ENVIRONMENT='dev01' DEBUG='true' CONSOLE='true' node server.js"
   },
   "keywords": [
     "inventory",

@@ -1,8 +1,10 @@
 //Dependencies
 var router = require('express').Router(),
-	logger = require('../common/ApiLogger'),
+	ApiLogger = require('../common/ApiLogger'),
 	ModelType = require('../models/ModelType'),
 	ResponseBuilder = require('./Response');
+
+var logger = ApiLogger.getLogger();
 
 var get = function (req, res, next) {
 	var modelName = req.params.modelType,

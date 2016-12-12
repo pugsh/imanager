@@ -3,9 +3,11 @@ var express = require('express'),
 	bodyParser = require('body-parser'),
 	path = require('path'),
 	mongoose = require('mongoose'),
-	logger = require('./service/src/common/ApiLogger'),
-	applicationProps = require('./service/src/config/ConfigManager'),
-	securityFilter = require('./service/src/common/middlewares/SecurityFilter');
+	ConfigManager = require('./service/src/config/ConfigManager'),
+	ApiLogger = require('./service/src/common/ApiLogger'),
+	securityFilter = require('./service/src/middlewares/SecurityFilter');
+
+var logger = ApiLogger.getLogger();
 
 // Use native Node promises
 mongoose.Promise = global.Promise;
@@ -40,9 +42,22 @@ app.use('/imanager/api', require('./service/src/controllers/ApiController'));
 // define route for utility service
 app.use('/imanager/report', require('./service/src/controllers/ReportServiceController'));
 
-mongoose.connect(applicationProps.devDBURL)
+var environment = process.env.ENVIRONMENT;
+//default environment is dev01
+if (!environment) {
+	environment = 'dev01';
+}
+var appPort = ConfigManager.getAppPort(environment);
+var dbConfig = ConfigManager.getDBConfig(environment);
+
+if (appPort === null || dbConfig === null) {
+	console.error('App port or database config is not defined.');
+	process.exit(1);
+}
+
+mongoose.connect(dbConfig.url)
 	.then(() => {
-		app.listen(3000, () => (logger.info('API is running on port 3000')));
+		app.listen(appPort, () => (logger.info('App is running on port ' + appPort)));
 	})
 	.catch((err) => {
 		logger.err(err.toString());

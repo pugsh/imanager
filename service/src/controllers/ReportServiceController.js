@@ -1,8 +1,10 @@
 //Dependencies
 var router = require('express').Router(),
-	logger = require('../common/ApiLogger'),
+	ApiLogger = require('../common/ApiLogger'),
 	printer = require('../util/PrintOrder'),
 	moment = require('moment');
+
+var logger = ApiLogger.getLogger();
 
 var downloadReport = function (req, res, next) {
 	var date = req.query.date;

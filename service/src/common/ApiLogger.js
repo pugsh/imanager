@@ -1,18 +1,47 @@
 var winston = require('winston'),
-	applicationProps = require('../config/ConfigManager');
+	ConfigManager = require('../config/ConfigManager'),
+	Constants = require('./Constants');
 
-var logConfig = applicationProps.logParams;
+var logger = null;
+var env = process.env.ENVIRONMENT;
+var debug = process.env.DEBUG;
+var console = process.env.CONSOLE;
 
-// configure new api logger
-var logger = new(winston.Logger)({
-	transports: [
-		new(winston.transports.Console)({
-			"level": "debug",
-			"colorize": true,
-			"timestamp": true,
-		}),
-		new(winston.transports.File)(logConfig)
-	]
-});
+//default environment is dev01
+if (!env) {
+	env = 'dev01';
+}
 
-module.exports = logger;
+var fileParam = ConfigManager.getLogConfig(env);
+var consoleParam =
+	{
+		"colorize": true,
+		"timestamp": true,
+	};
+
+if (debug === 'true') {
+	fileParam.level = "debug";
+	consoleParam.level = "debug";
+} else {
+	fileParam.level = "info";
+	consoleParam.level = "info";
+}
+
+var consoleLogger = new (winston.transports.Console)(consoleParam);
+
+var transports = [new (winston.transports.File)(fileParam)];
+
+exports.getLogger = function () {
+	if (logger) {
+		return logger;
+	}
+	if (console === 'true') {
+		transports.push(consoleLogger);
+	}
+
+	logger = new (winston.Logger)({
+		transports: transports
+	});
+
+	return logger;
+}

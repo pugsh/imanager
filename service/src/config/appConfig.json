@@ -1,7 +1,8 @@
 [
 	{
-		"env": "dev",
+		"env": "dev01",
 		"description": "This is development environment configuration",
+		"port": 3000,
 		"resources": [
 			{
 				"language": "en_US",
@@ -12,17 +13,14 @@
 				"file": "../resources/messageResource_fr_CA.json"
 			}
 		],
-		"databases": [
-			{
-				"type": "mongodb",
-				"db": "test",
-				"serverip": "localhost",
-				"port": "27017",
-				"url": "mongodb://192.168.0.103:27017/test"
-			}
-		],
+		"db": {
+			"type": "mongodb",
+			"db": "test",
+			"serverip": "localhost",
+			"port": "27017",
+			"url": "mongodb://192.168.0.103:27017/test"
+		},
 		"logging": {
-			"level": "debug",
 			"colorize": true,
 			"timestamp": true,
 			"maxsize": 10000,
@@ -33,6 +31,7 @@
 	{
 		"env": "prod",
 		"description": "This is production environment configuration",
+		"port": 3000,
 		"resources": [
 			{
 				"language": "en_US",
@@ -43,15 +42,13 @@
 				"file": "../resources/messageResource_fr_CA.json"
 			}
 		],
-		"databases": [
-			{
-				"type": "mongodb",
-				"db": "prod01",
-				"serverip": "localhost",
-				"port": "27017",
-				"url": "mongodb://localhost:27017/prod01"
-			}
-		],
+		"db": {
+			"type": "mongodb",
+			"db": "prod01",
+			"serverip": "localhost",
+			"port": "27017",
+			"url": "mongodb://localhost:27017/prod01"
+		},
 		"logging": {
 			"level": "error",
 			"transports": [
