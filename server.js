@@ -60,6 +60,6 @@ mongoose.connect(dbConfig.url)
 		app.listen(appPort, () => (logger.info('App is running on port ' + appPort)));
 	})
 	.catch((err) => {
-		logger.err(err.toString());
+		logger.error(err.toString());
 		process.exit(1);
 	});

@@ -18,7 +18,7 @@
 			"db": "test",
 			"serverip": "localhost",
 			"port": "27017",
-			"url": "mongodb://192.168.0.103:27017/test"
+			"url": "mongodb://localhost:27017/test"
 		},
 		"logging": {
 			"colorize": true,
