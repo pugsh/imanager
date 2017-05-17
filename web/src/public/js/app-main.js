@@ -35,8 +35,9 @@ $(document).ready(function () {
 		}
 	};
 
-	imanager.callService = function (config) {
+	imanager.callService = function (req) {
 		var response;
+		var config = Object.assign({}, req);
 		if (config === undefined) {
 			throw 'config param missing';
 		}
@@ -91,6 +92,7 @@ $(document).ready(function () {
 
 	imanager.onSave = function (evt) {
 		debugger;
+		var isBatchInsert = false;
 		var form = $('#dialog-form')[0];
 		var data = form.getGroupData(),
 			viewMode = form.viewMode,
@@ -104,6 +106,11 @@ $(document).ready(function () {
 					suppliers.push(option.value);
 				});
 			data.suppliers = suppliers;
+
+			var productNames = data.productName.split("$");
+			if (productNames && productNames.length > 1) {
+				isBatchInsert = true;
+			}
 		}
 
 		if (viewMode === 'add') {
@@ -119,10 +126,20 @@ $(document).ready(function () {
 				data: data
 			};
 		}
-
-		var response = imanager.callService(config);
-		$('#dialog-cancel').click();
-		component.showMessage(response);
+		var response;
+		if (isBatchInsert) {
+			productNames.forEach((productName) => {
+				config.data.productName = productName;
+				response = imanager.callService(config);
+				console.log(response);
+			});
+			$('#dialog-cancel').click();
+			component.showMessage(response);
+		} else {
+			response = imanager.callService(config);
+			$('#dialog-cancel').click();
+			component.showMessage(response);
+		}
 	};
 
 	imanager.onDelete = function (evt) {
