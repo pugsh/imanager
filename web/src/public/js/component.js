@@ -200,13 +200,15 @@
 			var els = this.elements,
 				attr, className, pos = 0,
 				val;
+			const trim = (value = '') => value.trim();
+
 			for (var i = 0; i < els.length; i++) {
 				attr = els[i].getAttribute('name');
 				className = els[i].getAttribute('class');
 				if (className.indexOf('label') !== -1) {
-					val = els[i].innerHTML;
+					val = trim(els[i].innerHTML);
 				} else {
-					val = els[i].value;
+					val = trim(els[i].value);
 				}
 
 				if (attr.indexOf('.') !== -1) {

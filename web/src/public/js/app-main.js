@@ -129,7 +129,7 @@ $(document).ready(function () {
 		var response;
 		if (isBatchInsert) {
 			productNames.forEach((productName) => {
-				config.data.productName = productName;
+				config.data.productName = productName.trim();
 				response = imanager.callService(config);
 				console.log(response);
 			});
